@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FormComponent } from './form/form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, FormComponent],
@@ -16,6 +17,9 @@ import { FormComponent } from './form/form.component';
     ReactiveFormsModule,
     AngularFireFunctionsModule,
     AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
