@@ -21,6 +21,9 @@ export class FormComponent {
     }
 
     this.isLoading = true;
+    this.isSuccess = false;
+    this.failureMessage = '';
+
     const sendToInboxFn = this.fns.httpsCallable('sendToInbox');
     sendToInboxFn({ content: value }).subscribe(res => {
       if (res.success) {
