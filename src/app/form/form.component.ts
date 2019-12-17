@@ -7,13 +7,29 @@ import { AngularFireFunctions } from '@angular/fire/functions';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   textarea = new FormControl('');
   isLoading = false;
   isSuccess = false;
   failureMessage = '';
 
   constructor(private fns: AngularFireFunctions) {}
+
+  ngOnInit(): void {
+    const parsedUrl = new URL(window.location.toString());
+    const title = parsedUrl.searchParams.get('title');
+    const text = parsedUrl.searchParams.get('text');
+    const url = parsedUrl.searchParams.get('url');
+    if (title || text || url) {
+      this.textarea.setValue(
+        `Title shared: ${title}
+
+Text shared: ${text}
+
+URL shared: ${url}`,
+      );
+    }
+  }
 
   handleSubmit(value: string): void {
     if (!value) {

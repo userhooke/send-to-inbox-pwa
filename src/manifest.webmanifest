@@ -1,11 +1,21 @@
 {
-  "name": "send-to-inbox-app",
-  "short_name": "StI",
+  "name": "Send to Inbox PWA",
+  "short_name": "Send to Inbox",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "icons": [
     {
       "src": "/assets/icons/android-icon-36x36.png",
