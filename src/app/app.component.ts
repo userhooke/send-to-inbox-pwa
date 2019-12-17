@@ -1,35 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  textarea = new FormControl('');
-  isLoading = false;
-  isSuccess = false;
-  failureMessage = '';
+export class AppComponent implements OnInit {
+  user$!: Observable<firebase.User | null>;
+  isLoading = true;
+  email = new FormControl('');
+  password = new FormControl('');
+  errorMessage = '';
 
-  constructor(private fns: AngularFireFunctions) {}
+  constructor(public afAuth: AngularFireAuth) {}
 
-  handleSubmit(value: string): void {
-    if (!value) {
-      return;
-    }
+  ngOnInit(): void {
+    this.user$ = this.afAuth.user;
+    this.user$.subscribe(() => (this.isLoading = false));
+  }
 
+  login() {
     this.isLoading = true;
-    const sendToInboxFn = this.fns.httpsCallable('sendToInbox');
-    sendToInboxFn({ content: value }).subscribe(res => {
-      if (res.success) {
-        this.isSuccess = true;
-        this.textarea.reset();
-      } else {
-        this.failureMessage = res.error;
-      }
-      this.isLoading = false;
-    });
+    this.afAuth.auth
+      .signInWithEmailAndPassword(this.email.value, this.password.value)
+      .catch(err => {
+        this.errorMessage = err;
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
   }
 }

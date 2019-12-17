@@ -1,0 +1,26 @@
+<div class="form">
+  <div
+    class="status-message success"
+    *ngIf="isSuccess"
+    (click)="isSuccess = !isSuccess"
+  >
+    Message Sent!
+  </div>
+
+  <div
+    class="status-message error"
+    *ngIf="!isSuccess && failureMessage"
+    (click)="isSuccess = !isSuccess"
+  >
+    {{ failureMessage }}
+  </div>
+  <button
+    class="button"
+    [disabled]="isLoading"
+    (click)="handleSubmit(textarea.value)"
+  >
+    <span *ngIf="!isLoading">Submit</span>
+    <span *ngIf="isLoading">Sending...</span>
+  </button>
+  <textarea class="textarea" [formControl]="textarea" autofocus></textarea>
+</div>

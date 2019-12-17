@@ -1,38 +1,11 @@
 .container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 10px;
   height: 100%;
 }
 
-.button {
-  height: 30px;
-  margin-bottom: 15px;
-  align-self: flex-end;
-  width: 100px;
-}
-
-.textarea {
-  resize: vertical;
-  height: 100%;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.status-message {
-  position: absolute;
-  padding: 5px;
-  max-width: 50%;
-  cursor: pointer;
-
-  &.success {
-    background-color: #8bc34a;
-  }
-  &.error {
-    background-color: #ff5722;
-  }
+.input {
+  display: block;
+  margin-bottom: 5px;
 }
