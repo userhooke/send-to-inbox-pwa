@@ -4,7 +4,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import {
+  AngularFireFunctionsModule,
+  FUNCTIONS_ORIGIN,
+} from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FormComponent } from './form/form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -21,7 +24,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       enabled: environment.production,
     }),
   ],
-  providers: [],
+  providers: [
+    // { provide: FUNCTIONS_ORIGIN, useValue: 'http://localhost:5000' }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
