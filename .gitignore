@@ -42,6 +42,10 @@ testem.log
 /typings
 .firebase
 /src/environments
+.cache/
+dist/*
+!dist/index.html
+*.log
 
 # System Files
 .DS_Store
