@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Send to Inbox App</title>
-  <script defer src="index.js"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Hello there 👋🏻</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send to Inbox App</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#1976d2" />
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- FORM -->
+      <div id="form" class="form">
+        <div class="status-message success">
+          Message Sent!
+        </div>
+        <button type="submit" class="button">
+          <span *ngIf="!isLoading">Submit</span>
+        </button>
+        <textarea aria-label="textarea" class="textarea" autofocus></textarea>
+      </div>
+      <!-- /FORM -->
+    </div>
+  </body>
 </html>
