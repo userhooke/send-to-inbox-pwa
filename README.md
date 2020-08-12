@@ -2,7 +2,7 @@
 
 ## TODO
 
--UI
+- UI
   - [x] authentication screen
   - [x] send email request function
   - [x] deploy to CloudFront
@@ -13,4 +13,4 @@
   - [x] add send email function
   - [x] deploy to lambda
   - [ ] protect lambda execution abuse via api gateway
-  
+- Update Readme
