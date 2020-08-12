@@ -1,0 +1,12 @@
+{
+  "name": "send-to-inbox-app-ui",
+  "version": "2.0.0",
+  "scripts": {
+    "dev": "live-server --no-browser src",
+    "deploy": "aws s3 sync src s3://send-to-inbox.hooke.dev --region eu-west-1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

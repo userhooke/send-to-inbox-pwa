@@ -1,14 +1,14 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
 
 # dependencies
-/node_modules
+node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -24,12 +24,7 @@ speed-measure-plugin*.json
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
+.vscode
 
 # misc
 /.sass-cache
@@ -42,6 +37,11 @@ testem.log
 /typings
 .firebase
 /src/environments
+.cache/
+dist/*
+!dist/index.html
+*.log
+.env
 
 # System Files
 .DS_Store
