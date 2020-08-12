@@ -7,7 +7,7 @@ export async function handleAuth(authNode) {
     if (!email.value || !key.value) return;
 
     try {
-      const { token } = await post('https://264yww7hy3.execute-api.eu-west-1.amazonaws.com/prod/api/authenticate', {
+      const { token } = await post('http://localhost:5000/api/authenticate', {
         email: email.value,
         key: key.value,
       });
@@ -29,7 +29,7 @@ export async function handleForm(formNode) {
     if (!textarea.value) return;
 
     try {
-      const result = await post('https://264yww7hy3.execute-api.eu-west-1.amazonaws.com/prod/api/send', {
+      const result = await post('http://localhost:5000/api/send', {
         email: localStorage.getItem('email'),
         message: textarea.value,
       });
