@@ -1,4 +1,5 @@
-import { handleAuth, handleForm, getShareToData } from './functions.mjs';
+import { handleAuth, handleForm, handleLoading, handleError, handleSuccess } from './handlers.mjs';
+import { getShareToData } from './utils.mjs'
 
 const form = document.querySelector('#form');
 const auth = document.querySelector('#auth');
@@ -11,7 +12,14 @@ if (location.search) {
 }
 
 /**
- * Auth handlers
+ * Setup listeners
+ */
+form.addEventListener('loading', handleLoading)
+form.addEventListener('error', handleError)
+form.addEventListener('success', handleSuccess)
+
+/**
+ * Setup handlers
  */
 if (!localStorage.getItem('token') || !localStorage.getItem('email')) {
   form.remove();
