@@ -1,4 +1,8 @@
 /**
+ * Utils are for helpers and tools
+ */
+
+/**
  * Androind native "Share to" handler
  */
 export function getShareToData() {
@@ -27,7 +31,13 @@ export function showStatus(status, message) {
  */
 export function showLoading(flag) {
   const btn = document.querySelector('#submitFormBtn');
-  btn.innerText = flag ? 'Loading...' : 'Submit'
+  if (flag) {
+    btn.innerText = 'Loading...';
+    btn.disabled = true
+  } else {
+    btn.innerText = 'Submit'
+    btn.disabled = false
+  }
 }
 
 /**

@@ -1,30 +1,35 @@
-import { handleAuth, handleForm, handleLoading, handleError, handleSuccess } from './handlers.mjs';
-import { getShareToData } from './utils.mjs'
-
-const form = document.querySelector('#form');
-const auth = document.querySelector('#auth');
-
-/**
- * Android native "Share to" handler
- */
-if (location.search) {
-  form.querySelector('textarea').value = getShareToData();
-}
+import {
+  visitorListener,
+  authListener,
+  loadingListener,
+  errorListener,
+  successListener,
+  formListener,
+  authSubmitListener,
+  formSubmitListener,
+  viewListener,
+} from './listeners.mjs';
+import { visitorEvent } from './events.mjs';
+import {
+  formElement,
+  formSubmitElement,
+  authSubmitElement,
+} from './elements.mjs';
 
 /**
  * Setup listeners
  */
-form.addEventListener('loading', handleLoading)
-form.addEventListener('error', handleError)
-form.addEventListener('success', handleSuccess)
+document.addEventListener('visitor', visitorListener);
+document.addEventListener('authorized', viewListener);
+document.addEventListener('authorized', authListener);
+document.addEventListener('authorized', formListener);
+formElement.addEventListener('loading', loadingListener);
+formElement.addEventListener('error', errorListener);
+formElement.addEventListener('success', successListener);
+formSubmitElement.addEventListener('click', formSubmitListener);
+authSubmitElement.addEventListener('click', authSubmitListener);
 
 /**
- * Setup handlers
+ * Fire init events
  */
-if (!localStorage.getItem('token') || !localStorage.getItem('email')) {
-  form.remove();
-  handleAuth(auth);
-} else {
-  auth.remove();
-  handleForm(form);
-}
+document.dispatchEvent(visitorEvent);
