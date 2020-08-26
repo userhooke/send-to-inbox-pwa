@@ -33,20 +33,27 @@ export function showLoading(flag) {
   const btn = document.querySelector('#submitFormBtn');
   if (flag) {
     btn.innerText = 'Loading...';
-    btn.disabled = true
+    btn.disabled = true;
   } else {
-    btn.innerText = 'Submit'
-    btn.disabled = false
+    btn.innerText = 'Submit';
+    btn.disabled = false;
   }
 }
 
 /**
  *
  */
-export async function post(url, data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+export async function api(method, endpoint, data = {}) {
+  let url =
+    localStorage.getItem('API_URL') ||
+    'https://264yww7hy3.execute-api.eu-west-1.amazonaws.com/prod/api';
+
+  if (url.slice(-1) !== '/') {
+    url = url.concat('/');
+  }
+
+  const response = await fetch(url + endpoint, {
+    method, // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin', // include, *same-origin, omit
