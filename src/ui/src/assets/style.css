@@ -2,12 +2,49 @@
   --main-bg-color: #fbf7f0;
   --status-success: #8bc34a;
   --status-error: #ff5722;
+  --textarea-color: #fff;
+  --font-color: #000;
+  --button-color: darkgray;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #000;
+    --textarea-color: #000;
+    --font-color: green;
+    --button-color: darkgray;
+  }
+}
+
+* {
+  font-family: 'Source Code Pro', monospace;
+  color: var(--font-color);
+  font-size: 16px;
 }
 
 html,
 body {
   height: 100%;
-  font-family: monospace;
+}
+
+button {
+  background-color: var(--button-color);
+  border: none;
+}
+
+.textarea {
+  resize: vertical;
+  height: 100%;
+  background-color: var(--textarea-color);
+  border: none;
+  padding: 5px;
+  outline-color: lightgray;
+  outline-style: dashed;
+}
+
+input {
+  background-color: var(--textarea-color);
+  color: var(--font-color);
 }
 
 body {
@@ -45,11 +82,6 @@ body {
   justify-content: space-between;
   display: flex;
   margin-bottom: 15px;
-}
-
-.textarea {
-  resize: vertical;
-  height: 100%;
 }
 
 .form {
