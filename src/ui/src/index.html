@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Send to Inbox App</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="apple-touch-icon" href="assets/icons/android-icon-192x192.png">
+    <link rel="apple-touch-icon" href="assets/icons/android-icon-192x192.png" />
     <link rel="manifest" href="manifest.webmanifest" />
     <script type="module" src="js/main.mjs"></script>
     <link rel="stylesheet" href="assets/style.css" />
@@ -13,42 +13,50 @@
   <body>
     <div class="container">
       <!-- FORM -->
-      <div id="form" class="form">
-        <div class="status-message"></div>
-        <button id="submitFormBtn" type="submit" class="button">Submit</button>
-        <textarea aria-label="textarea" class="textarea" autofocus></textarea>
-      </div>
+      <section class="ui-component" data-name="form">
+        <div id="form" class="form">
+          <div class="controls">
+            <button id="submitFormBtn" type="submit" class="button">
+              Submit
+            </button>
+            <div class="status-message"></div>
+          </div>
+          <textarea aria-label="textarea" class="textarea" autofocus></textarea>
+        </div>
+      </section>
       <!-- /FORM -->
 
       <!-- AUTH -->
-      <div id="auth" class="auth">
-        <fieldset>
-          <p>Please login.</p>
-        </fieldset>
-        <fieldset>
-          <label for="email">Email</label>
-          <input
-            class="input"
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-          />
-        </fieldset>
-        <fieldset>
-          <label for="key">Key</label>
-          <input
-            class="input"
-            type="password"
-            name="key"
-            id="key"
-            placeholder="Key"
-          />
-        </fieldset>
-        <fieldset>
-          <button type="submit">Login</button>
-        </fieldset>
-      </div>
+      <section class="ui-component" data-name="auth">
+        <div id="auth" class="auth">
+          <fieldset>
+            <p>Please login.</p>
+          </fieldset>
+          <fieldset>
+            <label for="email">Email</label>
+            <input
+              class="input"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+            />
+          </fieldset>
+          <fieldset>
+            <label for="key">Key</label>
+            <input
+              class="input"
+              type="password"
+              name="key"
+              id="key"
+              placeholder="Key"
+            />
+          </fieldset>
+          <fieldset>
+            <button type="submit">Login</button>
+          </fieldset>
+        </div>
+      </section>
       <!-- /AUTH -->
     </div>
   </body>

@@ -4,10 +4,10 @@
 
 import {
   formElement,
-  authElement,
   textareaElement,
   emailInputElement,
   keyInputElement,
+  viewContainerElement,
 } from './elements.mjs';
 import { showStatus, showLoading, getShareToData } from './utils.mjs';
 import {
@@ -17,7 +17,7 @@ import {
   successEvent,
   errorEvent,
 } from './events.mjs';
-import { api } from './utils.mjs';
+import { api, render } from './utils.mjs';
 
 /**
  *
@@ -34,13 +34,9 @@ export function visitorListener(event) {
  *
  */
 export function viewListener(event) {
-  if (event.type === 'authorized') {
-    authElement.setAttribute('style', 'display: none');
-    formElement.removeAttribute('style');
-  } else {
-    formElement.setAttribute('style', 'display: none');
-    authElement.removeAttribute('style');
-  }
+  event.type === 'authorized'
+    ? render(viewContainerElement, ['form'])
+    : render(viewContainerElement, ['auth']);
 }
 
 /**

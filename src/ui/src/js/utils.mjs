@@ -53,17 +53,15 @@ export async function api(method, endpoint, data = {}) {
   }
 
   const response = await fetch(url + endpoint, {
-    method, // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
+    method,
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
       authorization: 'Bearer ' + localStorage.getItem('token'),
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
 
@@ -72,4 +70,20 @@ export async function api(method, endpoint, data = {}) {
   }
 
   return response.json(); // parses JSON response into native JavaScript objects
+}
+
+/**
+ * Spefify which elements should be displayed.
+ * Example of a ui-components: `<section class="ui-component" data-name="form"></section>`
+ * @param {HTMLElement} root - Only direct children of a root element will be modified
+ * @param {Array} names - Array of `data-name`'s of elements to display
+ */
+export function render(root, names) {
+  for (let comp of root.children) {
+    names.forEach((el) => {
+      comp.dataset.name === el
+        ? comp.setAttribute('style', 'display: unset')
+        : comp.removeAttribute('style');
+    });
+  }
 }

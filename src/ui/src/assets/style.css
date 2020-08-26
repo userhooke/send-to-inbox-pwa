@@ -21,6 +21,10 @@ body {
   box-sizing: border-box;
 }
 
+.ui-component {
+  display: none;
+}
+
 .container {
   max-width: 400px;
   margin: 0 auto;
@@ -32,9 +36,15 @@ body {
 
 .button {
   height: 30px;
-  margin-bottom: 15px;
-  align-self: flex-end;
+  flex-shrink: 0;
   width: 100px;
+  align-self: flex-end;
+}
+
+.controls {
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 15px;
 }
 
 .textarea {
@@ -49,10 +59,7 @@ body {
 }
 
 .status-message {
-  position: absolute;
   padding: 5px;
-  max-width: 50%;
-  cursor: pointer;
   display: none;
 }
 

@@ -2,6 +2,8 @@
  * Elements are for providing access to DOM elements
  */
 
+export const viewContainerElement = document.querySelector('.container');
+
 export const formElement = document.querySelector('#form');
 export const textareaElement = formElement.querySelector('textarea');
 export const formSubmitElement = formElement.querySelector('button');
