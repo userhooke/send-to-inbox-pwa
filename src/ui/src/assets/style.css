@@ -76,11 +76,6 @@ body {
   flex-shrink: 0;
   width: 100px;
   align-self: flex-end;
-}
-
-.controls {
-  justify-content: space-between;
-  display: flex;
   margin-bottom: 15px;
 }
 
@@ -93,6 +88,7 @@ body {
 .status-message {
   padding: 5px;
   display: none;
+  position: absolute;
 }
 
 .status-message.success {
