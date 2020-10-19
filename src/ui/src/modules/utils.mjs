@@ -17,36 +17,11 @@ export function getShareToData() {
 /**
  *
  */
-export function showStatus(status, message) {
-  const el = document.querySelector('.status-message');
-  el.innerText = message;
-  el.classList.add(status);
-  setTimeout(() => {
-    el.classList.remove(status);
-  }, 5000);
-}
-
-/**
- *
- */
-export function showLoading(flag) {
-  const btn = document.querySelector('#submitFormBtn');
-  if (flag) {
-    btn.innerText = 'Loading...';
-    btn.disabled = true;
-  } else {
-    btn.innerText = 'Submit';
-    btn.disabled = false;
-  }
-}
-
-/**
- *
- */
 export async function api(method, endpoint, data = {}) {
-  let url =
-    localStorage.getItem('API_URL') ||
-    'https://264yww7hy3.execute-api.eu-west-1.amazonaws.com/prod/api';
+  // throw new Error('fuck!');
+  // return data;
+
+  let url = localStorage.getItem('API_URL') || window.CONFIG.API_URL;
 
   if (url.slice(-1) !== '/') {
     url = url.concat('/');
