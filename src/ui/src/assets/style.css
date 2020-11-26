@@ -19,7 +19,6 @@
 * {
   font-family: 'Source Code Pro', monospace;
   color: var(--font-color);
-  font-size: 16px;
 }
 
 html,
@@ -53,7 +52,7 @@ body {
 }
 
 .main-view {
-  max-width: 400px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 10px;
   height: 100%;
