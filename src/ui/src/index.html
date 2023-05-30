@@ -12,20 +12,13 @@
       rel="stylesheet"
     />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="assets/style.css" />
-    <script defer type="module" src="modules/main.mjs"></script>
-    <script defer type="module" src="components/AuthForm.mjs"></script>
-    <script defer type="module" src="components/SendToInbox.mjs"></script>
+    <link rel="stylesheet" href="main.css" />
+    <script defer src="app.js"></script>
+    <script defer src="auth.js"></script>
+    <script defer src="form.js"></script>
+    <script defer src="main.js"></script>
   </head>
   <body>
-    <div class="main-view">
-      <!-- FORM -->
-      <send-to-inbox class="ui-component" data-name="form"></send-to-inbox>
-      <!-- /FORM -->
-
-      <!-- AUTH -->
-      <auth-form class="ui-component" data-name="auth"></auth-form>
-      <!-- /AUTH -->
-    </div>
+    <div id="root"></div>
   </body>
 </html>
