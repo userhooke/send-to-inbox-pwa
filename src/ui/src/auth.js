@@ -75,7 +75,7 @@ app.auth.tryToLogin = async () => {
   app.auth.showLoading();
 
   try {
-    const { token } = await common.api('POST', 'authenticate', {
+    const { token } = await app.api('POST', 'authenticate', {
       email,
       key,
     });
@@ -88,7 +88,7 @@ app.auth.tryToLogin = async () => {
     localStorage.setItem('email', email);
     localStorage.setItem('token', token);
 
-    capturer.init();
+    app.form.init();
   } catch (e) {
     console.error(e);
   }
