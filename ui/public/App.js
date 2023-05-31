@@ -1,17 +1,30 @@
-class App {
-  #root;
+/**
+ * @todo
+ * setInterval(() => {
+ *   const backup = app.form.getFormData();
+ *   if (!backup) return;
+ *   app.form.setBackup(backup);
+ * }, 5000);
+ */
+function App() {
+  const root = HTML.div({}, view());
+  const updateView = HTML.updateNode(root);
 
-  constructor(root) {
-    this.#root = root;
-    this.updateScene();
+  function isLoggedIn() {
+    return localStorage.getItem('token') && localStorage.getItem('email');
   }
 
-  updateScene() {
-    if (Auth.isLoggedIn()) {
-      alert('logged in!');
+  function updateScene() {
+    updateView(view());
+  }
+
+  function view() {
+    if (isLoggedIn()) {
+      return Form();
     } else {
-      const auth = new Auth(this.#root);
-      auth.onUserLoggedIn(() => this.updateScene());
+      return Auth({ userLoggedIn: updateScene });
     }
   }
+
+  return root;
 }

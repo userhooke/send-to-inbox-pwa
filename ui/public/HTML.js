@@ -1,4 +1,4 @@
-const Dom = {
+const HTML = {
   createElement(name, attrs, ...children) {
     const element = document.createElement(name);
     for (const child of children) {
@@ -24,10 +24,16 @@ const Dom = {
 
     return element;
   },
+
+  updateNode(root) {
+    return (newElement) => {
+      root.replaceChildren();
+      root.appendChild(newElement);
+    };
+  },
 };
 
-const TAGS = ['div', 'button', 'fieldset', 'h1', 'input', 'label'];
-for (let tagName of TAGS) {
-  Dom[tagName] = (attrs, ...children) =>
-    Dom.createElement(tagName, attrs, ...children);
-}
+['div', 'button', 'fieldset', 'h1', 'input', 'label'].forEach((tagName) => {
+  HTML[tagName] = (attrs, ...children) =>
+    HTML.createElement(tagName, attrs, ...children);
+});

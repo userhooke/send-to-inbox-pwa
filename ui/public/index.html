@@ -13,13 +13,16 @@
     />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="main.css" />
-    <script defer src="Dom.js"></script>
-    <script defer src="Api.js"></script>
-    <script defer src="Auth.js"></script>
-    <script defer src="App.js"></script>
-    <script defer src="main.js"></script>
   </head>
   <body>
     <div id="root"></div>
+    <script src="HTML.js"></script>
+    <script src="Api.js"></script>
+    <script src="Auth.js"></script>
+    <script src="Form.js"></script>
+    <script src="App.js"></script>
+    <script>
+      root.appendChild(App());
+    </script>
   </body>
 </html>
