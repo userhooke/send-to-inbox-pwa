@@ -1,13 +1,13 @@
-var path = require('path');
+var path = require("path");
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   // entry: './lambda.js',
-  entry: './run-local-server.js',
-  target: 'node',
+  entry: "./run-local-server.js",
+  target: "node",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'sendToInboxLambda.js',
-    libraryTarget: 'umd'
-  }
+    path: path.resolve(__dirname, "dist"),
+    filename: "sendToInboxLambda.js",
+    libraryTarget: "umd",
+  },
 };

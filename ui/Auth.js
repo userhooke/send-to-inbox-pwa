@@ -2,17 +2,17 @@ function Auth({ userLoggedIn }) {
   const { div, fieldset, h1, label, input, button } = HTML;
 
   const email = input({
-    class: 'input',
-    type: 'email',
-    id: 'email',
-    placeholder: 'Email',
+    class: "input",
+    type: "email",
+    id: "email",
+    placeholder: "Email",
   });
 
   const key = input({
-    class: 'input',
-    type: 'password',
-    id: 'key',
-    placeholder: 'Key',
+    class: "input",
+    type: "password",
+    id: "key",
+    placeholder: "Key",
   });
 
   const feedbackButtonHolder = fieldset({}, activeButon());
@@ -20,15 +20,15 @@ function Auth({ userLoggedIn }) {
   const updateFeedback = HTML.updateNode(feedbackButtonHolder);
 
   function activeButon() {
-    return button({ type: 'submit', onclick: () => tryToLogin() }, 'Login');
+    return button({ type: "submit", onclick: () => tryToLogin() }, "Login");
   }
 
   function errorButon(msg) {
-    return button({ style: 'color: red;' }, msg);
+    return button({ style: "color: red;" }, msg);
   }
 
   function loadingButton() {
-    return button({}, '🤔');
+    return button({}, "🤔");
   }
 
   function showError(msg) {
@@ -44,7 +44,7 @@ function Auth({ userLoggedIn }) {
 
   async function tryToLogin() {
     if (!email.value || !key.value) {
-      showError('Email or key is not specified.');
+      showError("Email or key is not specified.");
       return;
     }
     showLoading();
@@ -54,11 +54,11 @@ function Auth({ userLoggedIn }) {
         key: key.value,
       });
       if (!token) {
-        showError('Wrong key.');
+        showError("Wrong key.");
         return;
       }
-      localStorage.setItem('email', email.value);
-      localStorage.setItem('token', token);
+      localStorage.setItem("email", email.value);
+      localStorage.setItem("token", token);
       userLoggedIn();
     } catch (e) {
       showError(e);
@@ -66,10 +66,10 @@ function Auth({ userLoggedIn }) {
   }
 
   return div(
-    { id: 'auth' },
-    fieldset({}, h1({}, 'Please login')),
-    fieldset({}, label({ for: 'email' }, email)),
-    fieldset({}, label({ for: 'key' }, key)),
+    { id: "auth" },
+    fieldset({}, h1({}, "Please login")),
+    fieldset({}, label({ for: "email" }, email)),
+    fieldset({}, label({ for: "key" }, key)),
     feedbackButtonHolder,
   );
 }

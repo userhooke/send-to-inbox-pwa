@@ -1,19 +1,19 @@
-const jwt = require('jsonwebtoken');
-const aws = require('aws-sdk');
-const ses = new aws.SES({ region: 'eu-west-1' });
+const jwt = require("jsonwebtoken");
+const aws = require("aws-sdk");
+const ses = new aws.SES({ region: "eu-west-1" });
 
 module.exports = (req, res) => {
   const { message, email } = req.body;
 
   if (!message || !email) {
     res.sendStatus(403);
-    console.error('No email or message provided ', req.body);
+    console.error("No email or message provided ", req.body);
     return;
   }
   jwt.verify(req.token, process.env.SECRET, async (err, authData) => {
     if (err) {
       res.sendStatus(403);
-      console.error('Wrong token ', err);
+      console.error("Wrong token ", err);
       return;
     }
 
@@ -45,9 +45,9 @@ function sendEmail(email, message) {
         Text: { Data: message },
       },
 
-      Subject: { Data: JSON.stringify(message.substring(0, 30) + '...') },
+      Subject: { Data: JSON.stringify(message.substring(0, 30) + "...") },
     },
-    Source: 'no-reply@hooke.dev',
+    Source: "no-reply@hooke.dev",
   };
 
   return new Promise((resolve, reject) => {

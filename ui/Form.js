@@ -176,33 +176,33 @@
 
 const FORM_TYPES = [
   {
-    type: 'Default',
+    type: "Default",
     entries: [
       {
-        question: '',
+        question: "",
       },
     ],
   },
   {
-    type: 'Finding the root cause',
+    type: "Finding the root cause",
     entries: [
       {
-        question: 'What is the matter?',
+        question: "What is the matter?",
       },
       {
-        question: 'What caused that?',
+        question: "What caused that?",
       },
       {
-        question: 'What caused that?',
+        question: "What caused that?",
       },
       {
-        question: 'What caused that?',
+        question: "What caused that?",
       },
       {
-        question: 'What caused that?',
+        question: "What caused that?",
       },
       {
-        question: 'What caused that?',
+        question: "What caused that?",
       },
     ],
   },
@@ -218,10 +218,10 @@ const FORM_TYPES = [
 function Form() {
   const { div, button, h2, textarea, updateNode } = HTML;
 
-  const feedbackArea = div({ class: 'send' }, defaultButton());
+  const feedbackArea = div({ class: "send" }, defaultButton());
   const updatefeedbackArea = updateNode(feedbackArea);
 
-  const form = div({ id: 'form' }, viewForm(FORM_TYPES[0]));
+  const form = div({ id: "form" }, viewForm(FORM_TYPES[0]));
   const updateForm = updateNode(form);
 
   function handleSubmit() {
@@ -229,11 +229,11 @@ function Form() {
   }
 
   function defaultButton() {
-    return button({ type: 'submit', onclick: () => handleSubmit() }, 'Submit');
+    return button({ type: "submit", onclick: () => handleSubmit() }, "Submit");
   }
 
   function loadingButton() {
-    return button({ disabled: '' }, '🤔');
+    return button({ disabled: "" }, "🤔");
   }
 
   function viewEntries(entries) {
@@ -242,11 +242,11 @@ function Form() {
 
   function viewEntry(question, answer) {
     return div(
-      { class: 'entry' },
-      question ? h2({ class: 'question' }, question) : null,
+      { class: "entry" },
+      question ? h2({ class: "question" }, question) : null,
       textarea(
-        { class: 'answer', 'aria-label': 'textarea', autofocus: '' },
-        answer ?? '',
+        { class: "answer", "aria-label": "textarea", autofocus: "" },
+        answer ?? "",
       ),
     );
   }
@@ -255,17 +255,17 @@ function Form() {
     return div(
       {},
       div(
-        { class: 'controls' },
+        { class: "controls" },
         button(
           {
-            class: 'form-selector-button',
+            class: "form-selector-button",
             onclick: () => showTemplateSelector(),
           },
-          '?',
+          "?",
         ),
         feedbackArea,
       ),
-      div({ class: 'entries' }, ...viewEntries(type.entries)),
+      div({ class: "entries" }, ...viewEntries(type.entries)),
     );
   }
 

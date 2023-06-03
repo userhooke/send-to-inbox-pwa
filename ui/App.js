@@ -11,7 +11,7 @@ function App() {
   const updateView = HTML.updateNode(root);
 
   function isLoggedIn() {
-    return localStorage.getItem('token') && localStorage.getItem('email');
+    return localStorage.getItem("token") && localStorage.getItem("email");
   }
 
   function updateScene() {
