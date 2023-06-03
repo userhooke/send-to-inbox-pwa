@@ -4,6 +4,8 @@ const HTML = {
     for (const child of children) {
       if (typeof child === 'string') {
         element.appendChild(document.createTextNode(child));
+      } else if (child === null) {
+        continue;
       } else {
         element.appendChild(child);
       }
@@ -26,14 +28,26 @@ const HTML = {
   },
 
   updateNode(root) {
-    return (newElement) => {
+    return (...newElements) => {
       root.replaceChildren();
-      root.appendChild(newElement);
+      for (const newElement of newElements) {
+        root.appendChild(newElement);
+      }
     };
   },
 };
 
-['div', 'button', 'fieldset', 'h1', 'input', 'label'].forEach((tagName) => {
+[
+  'div',
+  'button',
+  'fieldset',
+  'h1',
+  'input',
+  'textarea',
+  'label',
+  'h2',
+  'p',
+].forEach((tagName) => {
   HTML[tagName] = (attrs, ...children) =>
     HTML.createElement(tagName, attrs, ...children);
 });

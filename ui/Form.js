@@ -1,87 +1,4 @@
-// app.form = {};
-
-// app.form.types = [
-//   {
-//     type: 'Default',
-//     entries: [
-//       {
-//         question: '',
-//         answer: '',
-//       },
-//     ],
-//   },
-//   {
-//     type: 'Finding the root cause',
-//     entries: [
-//       {
-//         question: 'What is the matter?',
-//         answer: '',
-//       },
-//       {
-//         question: 'What caused that?',
-//         answer: '',
-//       },
-//       {
-//         question: 'What caused that?',
-//         answer: '',
-//       },
-//       {
-//         question: 'What caused that?',
-//         answer: '',
-//       },
-//       {
-//         question: 'What caused that?',
-//         answer: '',
-//       },
-//       {
-//         question: 'What caused that?',
-//         answer: '',
-//       },
-//     ],
-//   },
-// ];
-
-// app.form.template = {};
 // app.form.template.shell = (template) => /* html */ `
-
-//   <style>
-//     #form {
-//       display: flex;
-//       flex-direction: column;
-//       height: 100%;
-//     }
-
-//     #form .controls {
-//       display: flex;
-//       justify-content: space-between;
-//     }
-
-//     #form button {
-//       height: 30px;
-//       flex-shrink: 0;
-//       min-width: 100px;
-//       align-self: flex-end;
-//       margin-bottom: 15px;
-//     }
-
-//     #form .entries {
-//       height: 100%;
-//       display: flex;
-//       flex-direction: column;
-//     }
-
-//     #form .entry {
-//       flex: 1 0 auto;
-//       display: flex;
-//       flex-direction: column;
-//       min-height: 200px;
-//     }
-
-//     #form .entry p {
-//       margin-left: 5px;
-//       margin-bottom: 5px;
-//     }
-//   </style>
 
 //   <div id="form" data-type="${template.type}">
 //     <div class="controls">
@@ -101,10 +18,6 @@
 //     ${question && `<p class="question">${question}</p>`}
 //     <textarea class="answer" aria-label="textarea" autofocus>${answer}</textarea>
 //   </div>
-// `;
-
-// app.form.template.loadingButton = () => /* html */ `
-//   <button disabled>🤔</button>
 // `;
 
 // app.form.template.errorButton = (msg) => /* html */ `
@@ -261,6 +174,129 @@
 //   });
 // };
 
+const FORM_TYPES = [
+  {
+    type: 'Default',
+    entries: [
+      {
+        question: '',
+      },
+    ],
+  },
+  {
+    type: 'Finding the root cause',
+    entries: [
+      {
+        question: 'What is the matter?',
+      },
+      {
+        question: 'What caused that?',
+      },
+      {
+        question: 'What caused that?',
+      },
+      {
+        question: 'What caused that?',
+      },
+      {
+        question: 'What caused that?',
+      },
+      {
+        question: 'What caused that?',
+      },
+    ],
+  },
+];
+
+/**
+ * @todo
+ * - load from backup
+ * - store to backup
+ * - send data
+ * - clear form before showing success feedback
+ */
 function Form() {
-  return HTML.div({}, 'form');
+  const { div, button, h2, textarea, updateNode } = HTML;
+
+  const feedbackArea = div({ class: 'send' }, defaultButton());
+  const updatefeedbackArea = updateNode(feedbackArea);
+
+  const form = div({ id: 'form' }, viewForm(FORM_TYPES[0]));
+  const updateForm = updateNode(form);
+
+  function handleSubmit() {
+    updatefeedbackArea(loadingButton());
+  }
+
+  function defaultButton() {
+    return button({ type: 'submit', onclick: () => handleSubmit() }, 'Submit');
+  }
+
+  function loadingButton() {
+    return button({ disabled: '' }, '🤔');
+  }
+
+  function viewEntries(entries) {
+    return entries.map((e) => viewEntry(e.question, e.answer));
+  }
+
+  function viewEntry(question, answer) {
+    return div(
+      { class: 'entry' },
+      question ? h2({ class: 'question' }, question) : null,
+      textarea(
+        { class: 'answer', 'aria-label': 'textarea', autofocus: '' },
+        answer ?? '',
+      ),
+    );
+  }
+
+  function viewForm(type) {
+    return div(
+      {},
+      div(
+        { class: 'controls' },
+        button(
+          {
+            class: 'form-selector-button',
+            onclick: () => showTemplateSelector(),
+          },
+          '?',
+        ),
+        feedbackArea,
+      ),
+      div({ class: 'entries' }, ...viewEntries(type.entries)),
+    );
+  }
+
+  function selectForm(type) {
+    const selectedForm = FORM_TYPES.find((t) => t.type === type);
+    updateForm(viewForm(selectedForm));
+  }
+
+  function showTemplateSelector() {
+    updateForm(
+      ...FORM_TYPES.map((t) =>
+        button({ onclick: () => selectForm(t.type) }, t.type),
+      ),
+    );
+  }
+
+  function getFormData() {
+    //   const formType = document.querySelector('#form')?.dataset.type;
+    //   const entries = document.querySelectorAll('#form .entry');
+    //   if (!formType) return null;
+    //   let backup = {
+    //     type: formType,
+    //     entries: [],
+    //   };
+    //   for (const e of entries) {
+    //     const question = e.querySelector('.question')?.innerText || '';
+    //     const answer = e.querySelector('.answer').value;
+    //     backup.entries.push({ question, answer });
+    //   }
+    //   return backup;
+  }
+
+  return form;
 }

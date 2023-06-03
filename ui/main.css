@@ -73,3 +73,40 @@ textarea {
   display: block;
   flex: 1;
 }
+
+#form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#form .controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+#form button {
+  height: 30px;
+  flex-shrink: 0;
+  min-width: 100px;
+  align-self: flex-end;
+  margin-bottom: 15px;
+}
+
+#form .entries {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#form .entry {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+#form .entry p {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
