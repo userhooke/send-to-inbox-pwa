@@ -127,7 +127,7 @@ function Form({ backupFormData, getBackupData }) {
 
   function viewForm(type) {
     return div(
-      { "data-form-type": type.type },
+      { "data-form-type": type.type, class: "container" },
       div(
         { class: "controls" },
         button(

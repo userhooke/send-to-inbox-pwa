@@ -1,5 +1,5 @@
 function App() {
-  const root = HTML.div({}, view());
+  const root = HTML.div({ id: "root" }, view());
   const updateView = HTML.updateNode(root);
 
   function isLoggedIn() {
