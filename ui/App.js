@@ -1,11 +1,3 @@
-/**
- * @todo
- * setInterval(() => {
- *   const backup = app.form.getFormData();
- *   if (!backup) return;
- *   app.form.setBackup(backup);
- * }, 5000);
- */
 function App() {
   const root = HTML.div({}, view());
   const updateView = HTML.updateNode(root);
@@ -18,9 +10,31 @@ function App() {
     updateView(view());
   }
 
+  function backupFormData(backup) {
+    localStorage.setItem("backup", JSON.stringify(backup));
+  }
+
+  function getBackupData() {
+    let result = null;
+
+    const backupedData = localStorage.getItem("backup");
+    if (backupedData.length > 0) {
+      try {
+        result = JSON.parse(backupedData);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    return result;
+  }
+
   function view() {
     if (isLoggedIn()) {
-      return Form();
+      return Form({
+        backupFormData: (backup) => backupFormData(backup),
+        getBackupData,
+      });
     } else {
       return Auth({ userLoggedIn: updateScene });
     }

@@ -23,6 +23,7 @@ speed-measure-plugin*.json
 .settings/
 *.sublime-workspace
 /.vscode
+.run_on_save
 
 # misc
 /.sass-cache
