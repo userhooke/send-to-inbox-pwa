@@ -8,25 +8,25 @@ const FORM_TYPES = [
     ],
   },
   {
-    type: "Finding the root cause",
+    type: "Digging deeper",
     entries: [
       {
-        question: "What is the matter?",
+        question: "Why is that?",
       },
       {
-        question: "What caused that?",
+        question: "Why is that?",
       },
       {
-        question: "What caused that?",
+        question: "Why is that?",
       },
       {
-        question: "What caused that?",
+        question: "Why is that?",
       },
       {
-        question: "What caused that?",
+        question: "Why is that?",
       },
       {
-        question: "What caused that?",
+        question: "Why is that?",
       },
     ],
   },
