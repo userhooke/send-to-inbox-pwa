@@ -18,7 +18,7 @@ function App() {
     let result = null;
 
     const backupedData = localStorage.getItem("backup");
-    if (backupedData.length > 0) {
+    if (backupedData?.length > 0) {
       try {
         result = JSON.parse(backupedData);
       } catch (e) {
