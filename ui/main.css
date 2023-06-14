@@ -99,6 +99,7 @@ textarea {
   min-width: 100px;
   align-self: flex-end;
   margin-bottom: 15px;
+  display: block;
 }
 
 #form .entries {

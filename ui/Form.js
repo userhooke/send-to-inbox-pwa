@@ -11,7 +11,7 @@ const FORM_TYPES = [
     type: "Digging deeper",
     entries: [
       {
-        question: "Why is that?",
+        question: "What's the matter?",
       },
       {
         question: "Why is that?",
@@ -150,9 +150,8 @@ function Form({ backupFormData, getBackupData }) {
 
   function showTemplateSelector() {
     updateForm(
-      ...FORM_TYPES.map((t) =>
-        button({ onclick: () => selectForm(t.type) }, t.type),
-      ),
+      ...FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
+      div({id: "version"}, window.APP_VERSION || "")
     );
   }
 
