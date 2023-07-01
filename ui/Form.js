@@ -30,7 +30,41 @@ const FORM_TYPES = [
       },
     ],
   },
+  {
+    type: "Daily journal",
+    entries: [
+      {
+        question: "",
+        answer: formatDate(new Date()),
+      },
+      {
+        question: "What happened today?",
+      },
+      {
+        question: "How did you feel today?",
+      },
+      {
+        question: "What did you learn today?",
+      },
+      {
+        question: "What have you achieved today?",
+      },
+      {
+        question: "What are you grateful for today?",
+      },
+      {
+        question: "Any fails or complaints?",
+      },
+    ],
+  },
 ];
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = date.toLocaleString('default', { month: 'short' });
+  const day = date.getDate();
+  return `${day} ${month} ${year}`;
+}
 
 function Form({ backupFormData, getBackupData }) {
   const { div, button, h2, textarea, updateNode } = HTML;

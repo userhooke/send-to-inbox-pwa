@@ -1,5 +1,5 @@
 function App() {
-  window.APP_VERSION = "2.0.0";
+  window.APP_VERSION = "2.1.0";
 
   const root = HTML.div({ id: "root" }, view());
   const updateView = HTML.updateNode(root);
