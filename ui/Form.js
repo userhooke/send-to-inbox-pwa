@@ -41,19 +41,28 @@ const FORM_TYPES = [
         question: "What happened today?",
       },
       {
-        question: "How did you feel today?",
+        question: "Joy or Anger or?",
       },
       {
-        question: "What did you learn today?",
+        question: "What thought occupies my attention? How long? Why? Do I want this?",
       },
       {
-        question: "What have you achieved today?",
+        question: "With whom am I having dialogues in my head? How long?",
       },
       {
         question: "What are you grateful for today?",
       },
       {
-        question: "Any fails or complaints?",
+        question: "What have you achieved today?",
+      },
+      {
+        question: "Any fails today?",
+      },
+      {
+        question: "Any complaints?",
+      },
+      {
+        question: "What did you learn today?",
       },
     ],
   },
@@ -63,7 +72,9 @@ function formatDate(date) {
   const year = date.getFullYear();
   const month = date.toLocaleString('default', { month: 'short' });
   const day = date.getDate();
-  return `${day} ${month} ${year}`;
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${day} ${month} ${year} ${hours}:${minutes}`;
 }
 
 function Form({ backupFormData, getBackupData }) {
