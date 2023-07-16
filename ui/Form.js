@@ -35,7 +35,7 @@ const FORM_TYPES = [
     entries: [
       {
         question: "",
-        answer: formatDate(new Date()),
+        answer: formatDate(),
       },
       {
         question: "What happened today?",
@@ -68,13 +68,8 @@ const FORM_TYPES = [
   },
 ];
 
-function formatDate(date) {
-  const year = date.getFullYear();
-  const month = date.toLocaleString('default', { month: 'short' });
-  const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  return `${day} ${month} ${year} ${hours}:${minutes}`;
+function formatDate(date = new Date()) {
+  return date.toString()
 }
 
 function Form({ backupFormData, getBackupData }) {
