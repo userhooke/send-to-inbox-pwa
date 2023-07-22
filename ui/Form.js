@@ -38,9 +38,6 @@ const FORM_TYPES = [
         answer: formatDate(),
       },
       {
-        question: "What happened today?",
-      },
-      {
         question: "Joy or Anger or?",
       },
       {
@@ -50,16 +47,16 @@ const FORM_TYPES = [
         question: "With whom am I having dialogues in my head? How long?",
       },
       {
+        question: "What happened today?",
+      },
+      {
+        question: "With whom have you interacted today? How do you feel about that? Could you describe the situation?",
+      },
+      {
         question: "What are you grateful for today?",
       },
       {
         question: "What have you achieved today?",
-      },
-      {
-        question: "Any fails today?",
-      },
-      {
-        question: "Any complaints?",
       },
       {
         question: "What did you learn today?",
