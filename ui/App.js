@@ -1,6 +1,4 @@
 function App() {
-  window.APP_VERSION = "2.1.3";
-
   const root = HTML.div({ id: "root" }, view());
   const updateView = HTML.updateNode(root);
 

@@ -71,5 +71,6 @@ function Auth({ userLoggedIn }) {
     fieldset({}, label({ for: "email" }, email)),
     fieldset({}, label({ for: "key" }, key)),
     feedbackButtonHolder,
+    fieldset({}, APP_VERSION || "")
   );
 }

@@ -1,74 +1,3 @@
-const FORM_TYPES = [
-  {
-    type: "Default",
-    entries: [
-      {
-        question: "",
-      },
-    ],
-  },
-  {
-    type: "Digging deeper",
-    entries: [
-      {
-        question: "What's the matter?",
-      },
-      {
-        question: "Why is that?",
-      },
-      {
-        question: "Why is that?",
-      },
-      {
-        question: "Why is that?",
-      },
-      {
-        question: "Why is that?",
-      },
-      {
-        question: "Why is that?",
-      },
-    ],
-  },
-  {
-    type: "Daily journal",
-    entries: [
-      {
-        question: "",
-        answer: formatDate(),
-      },
-      {
-        question: "Joy or Anger or?",
-      },
-      {
-        question: "What thought occupies my attention? How long? Why? Do I want this?",
-      },
-      {
-        question: "With whom am I having dialogues in my head? How long?",
-      },
-      {
-        question: "What happened today?",
-      },
-      {
-        question: "With whom have you interacted today? How do you feel about that? Could you describe the situation?",
-      },
-      {
-        question: "What are you grateful for today?",
-      },
-      {
-        question: "What have you achieved today?",
-      },
-      {
-        question: "What did you learn today?",
-      },
-    ],
-  },
-];
-
-function formatDate(date = new Date()) {
-  return date.toString()
-}
-
 function Form({ backupFormData, getBackupData }) {
   const { div, button, h2, textarea, updateNode } = HTML;
 
@@ -188,7 +117,7 @@ function Form({ backupFormData, getBackupData }) {
   function showTemplateSelector() {
     updateForm(
       ...FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
-      div({id: "version"}, window.APP_VERSION || "")
+      div({id: "version"}, APP_VERSION || "")
     );
   }
 
