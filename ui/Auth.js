@@ -17,8 +17,6 @@ function Auth({ userLoggedIn }) {
 
   const feedbackButtonHolder = fieldset({}, activeButon());
 
-  const updateFeedback = HTML.updateNode(feedbackButtonHolder);
-
   function activeButon() {
     return button({ type: "submit", onclick: () => tryToLogin() }, "Login");
   }
@@ -32,14 +30,14 @@ function Auth({ userLoggedIn }) {
   }
 
   function showError(msg) {
-    updateFeedback(errorButon(msg));
+    feedbackButtonHolder.update(errorButon(msg));
     setTimeout(() => {
-      updateFeedback(activeButon());
+      feedbackButtonHolder.update(activeButon());
     }, 5000);
   }
 
   function showLoading() {
-    updateFeedback(loadingButton());
+    feedbackButtonHolder.update(loadingButton());
   }
 
   async function tryToLogin() {

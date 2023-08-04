@@ -1,18 +1,16 @@
 function Form({ backupFormData, getBackupData }) {
-  const { div, button, h2, textarea, updateNode } = HTML;
+  const { div, button, h2, textarea } = HTML;
 
   const feedbackArea = div({ class: "send" }, defaultButton());
-  const updatefeedbackArea = updateNode(feedbackArea);
 
   const form = div({ id: "form" }, viewForm(getBackupData() || FORM_TYPES[0]));
-  const updateForm = updateNode(form);
 
   async function handleSubmit() {
     const data = getFormData();
     if (!data.entries.find((e) => e.answer.length > 0)) {
       return;
     }
-    updatefeedbackArea(loadingButton());
+    feedbackArea.update(loadingButton());
 
     let letter = "";
     for (const entry of data.entries) {
@@ -31,7 +29,7 @@ function Form({ backupFormData, getBackupData }) {
       });
 
       localStorage.removeItem("backup");
-      updateForm(viewForm(FORM_TYPES[0]));
+      form.update(viewForm(FORM_TYPES[0]));
       showSuccess();
     } catch (e) {
       console.error(e);
@@ -40,16 +38,16 @@ function Form({ backupFormData, getBackupData }) {
   }
 
   function showError(msg) {
-    updatefeedbackArea(errorButton(msg));
+    feedbackArea.update(errorButton(msg));
     setTimeout(() => {
-      updatefeedbackArea(defaultButton());
+      feedbackArea.update(defaultButton());
     }, 5000);
   }
 
   function showSuccess() {
-    updatefeedbackArea(successButton());
+    feedbackArea.update(successButton());
     setTimeout(() => {
-      updatefeedbackArea(defaultButton());
+      feedbackArea.update(defaultButton());
     }, 2000);
   }
 
@@ -111,11 +109,11 @@ function Form({ backupFormData, getBackupData }) {
 
   function selectForm(type) {
     const selectedForm = FORM_TYPES.find((t) => t.type === type);
-    updateForm(viewForm(selectedForm));
+    form.update(viewForm(selectedForm));
   }
 
   function showTemplateSelector() {
-    updateForm(
+    form.update(
       ...FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
       div({id: "version"}, APP_VERSION || "")
     );

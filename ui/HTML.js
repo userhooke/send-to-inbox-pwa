@@ -24,16 +24,20 @@ const HTML = {
       }
     }
 
-    return element;
-  },
-
-  updateNode(root) {
-    return (...newElements) => {
-      root.replaceChildren();
-      for (const newElement of newElements) {
-        root.appendChild(newElement);
+    element.update = (...newChildren) => {
+      element.replaceChildren();
+      for (const newChild of newChildren) {
+        if (typeof newChild === "string") {
+          element.appendChild(document.createTextNode(newChild));
+        } else if (newChild === null) {
+          continue;
+        } else {
+          element.appendChild(newChild);
+        }
       }
-    };
+    }
+
+    return element;
   },
 };
 
