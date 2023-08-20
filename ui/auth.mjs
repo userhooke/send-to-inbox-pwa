@@ -1,6 +1,7 @@
-function Auth({ userLoggedIn }) {
-  const { div, fieldset, h1, label, input, button } = HTML;
+import { div, fieldset, h1, label, input, button } from "./html.mjs";
+import { authenticate } from "./api.mjs";
 
+export function auth({ userLoggedIn }) {
   const email = input({
     class: "input",
     type: "email",
@@ -26,7 +27,7 @@ function Auth({ userLoggedIn }) {
   }
 
   function loadingButton() {
-    return button({}, "🤔");
+    return button("🤔");
   }
 
   function showError(msg) {
@@ -47,7 +48,7 @@ function Auth({ userLoggedIn }) {
     }
     showLoading();
     try {
-      const { token } = await Api.authenticate({
+      const { token } = await authenticate({
         email: email.value,
         key: key.value,
       });
@@ -65,10 +66,13 @@ function Auth({ userLoggedIn }) {
 
   return div(
     { id: "auth" },
-    fieldset({}, h1({}, "Please login")),
-    fieldset({}, label({ for: "email" }, email)),
-    fieldset({}, label({ for: "key" }, key)),
-    feedbackButtonHolder,
-    fieldset({}, APP_VERSION || "")
+    [
+      fieldset(h1("Please login")),
+      fieldset(label({ for: "email" }, email)),
+      fieldset(label({ for: "key" }, key)),
+      feedbackButtonHolder,
+      fieldset(APP_VERSION || "")
+    ]
   );
 }
+

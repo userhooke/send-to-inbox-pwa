@@ -1,5 +1,9 @@
-function App() {
-  const root = HTML.div({ id: "root" }, view());
+import { div } from "./html.mjs";
+import { auth } from "./auth.mjs";
+import { form } from "./form.mjs";
+
+export function app() {
+  const root = div({ id: "root" }, view());
 
   function isLoggedIn() {
     return localStorage.getItem("token") && localStorage.getItem("email");
@@ -30,12 +34,12 @@ function App() {
 
   function view() {
     if (isLoggedIn()) {
-      return Form({
+      return form({
         backupFormData: (backup) => backupFormData(backup),
         getBackupData,
       });
     } else {
-      return Auth({ userLoggedIn: updateScene });
+      return auth({ userLoggedIn: updateScene });
     }
   }
 

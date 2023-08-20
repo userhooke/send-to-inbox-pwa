@@ -1,4 +1,4 @@
-const FORM_TYPES = [
+export const FORM_TYPES = [
   {
     type: "Default",
     entries: [

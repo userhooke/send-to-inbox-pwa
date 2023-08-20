@@ -1,6 +1,8 @@
-function Form({ backupFormData, getBackupData }) {
-  const { div, button, h2, textarea } = HTML;
+import { div, button, h2, textarea } from "./html.mjs";
+import { sendMail } from "./api.mjs";
+import { FORM_TYPES } from "./form-types.mjs";
 
+export function form({ backupFormData, getBackupData }) {
   const feedbackArea = div({ class: "send" }, defaultButton());
 
   const form = div({ id: "form" }, viewForm(getBackupData() || FORM_TYPES[0]));
@@ -23,7 +25,7 @@ function Form({ backupFormData, getBackupData }) {
     }
 
     try {
-      await Api.sendMail({
+      await sendMail({
         email: localStorage.getItem("email"),
         message: letter,
       });
@@ -74,36 +76,42 @@ function Form({ backupFormData, getBackupData }) {
   function viewEntry(question, answer) {
     return div(
       { class: "entry", "data-entry": "" },
-      question
-        ? h2({ class: "question", "data-question": "" }, question)
-        : null,
-      textarea(
-        {
-          class: "answer",
-          "aria-label": "textarea",
-          autofocus: "",
-          "data-answer": "",
-        },
-        answer ?? "",
-      ),
+      [
+        question
+          ? h2({ class: "question", "data-question": "" }, question)
+          : null,
+        textarea(
+          {
+            class: "answer",
+            "aria-label": "textarea",
+            autofocus: "",
+            "data-answer": "",
+          },
+          answer ?? "",
+        ),
+      ]
     );
   }
 
   function viewForm(type) {
     return div(
       { "data-form-type": type.type, class: "container" },
-      div(
-        { class: "controls" },
-        button(
-          {
-            class: "form-selector-button",
-            onclick: () => showTemplateSelector(),
-          },
-          "?",
+      [
+        div(
+          { class: "controls" },
+          [
+            button(
+              {
+                class: "form-selector-button",
+                onclick: () => showTemplateSelector(),
+              },
+              "?",
+            ),
+            feedbackArea,
+          ]
         ),
-        feedbackArea,
-      ),
-      div({ class: "entries" }, ...viewEntries(type.entries)),
+        div({ class: "entries" }, viewEntries(type.entries)),
+      ]
     );
   }
 
@@ -113,10 +121,10 @@ function Form({ backupFormData, getBackupData }) {
   }
 
   function showTemplateSelector() {
-    form.update(
-      ...FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
+    form.update([
+      FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
       div({id: "version"}, APP_VERSION || "")
-    );
+    ]);
   }
 
   function getFormData() {
