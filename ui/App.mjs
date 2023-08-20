@@ -14,22 +14,11 @@ export function app() {
   }
 
   function backupFormData(backup) {
-    localStorage.setItem("backup", JSON.stringify(backup));
+    localStorage.setItem("backup", backup);
   }
 
   function getBackupData() {
-    let result = null;
-
-    const backupedData = localStorage.getItem("backup");
-    if (backupedData?.length > 0) {
-      try {
-        result = JSON.parse(backupedData);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-
-    return result;
+    return localStorage.getItem("backup");
   }
 
   function view() {

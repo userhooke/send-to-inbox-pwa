@@ -1,37 +1,34 @@
-import { div, button, h2, textarea } from "./html.mjs";
+import { div, button, textarea } from "./html.mjs";
 import { sendMail } from "./api.mjs";
-import { FORM_TYPES } from "./form-types.mjs";
 
 export function form({ backupFormData, getBackupData }) {
-  const feedbackArea = div({ class: "send" }, defaultButton());
 
-  const form = div({ id: "form" }, viewForm(getBackupData() || FORM_TYPES[0]));
+  const formInput = textarea(
+    {
+      class: "answer",
+      "aria-label": "textarea",
+      autofocus: "",
+    }
+  )
+  const feedbackArea = div({ class: "send" }, defaultButton());
+  const root = div({ id: "form" }, viewForm());
 
   async function handleSubmit() {
-    const data = getFormData();
-    if (!data.entries.find((e) => e.answer.length > 0)) {
-      return;
-    }
+    const message = formInput.value;
+    if (!message.length) return;
+    
     feedbackArea.update(loadingButton());
-
-    let letter = "";
-    for (const entry of data.entries) {
-      if (!!letter.length) letter += "\n\n";
-      if (!!entry.question.length) {
-        letter += entry.question;
-        letter += "\n";
-      }
-      if (!!entry.answer.length) letter += entry.answer;
-    }
 
     try {
       await sendMail({
         email: localStorage.getItem("email"),
-        message: letter,
+        message,
       });
 
       localStorage.removeItem("backup");
-      form.update(viewForm(FORM_TYPES[0]));
+      formInput.value = "";
+      root.update(viewForm());
+      formInput.focus();
       showSuccess();
     } catch (e) {
       console.error(e);
@@ -69,33 +66,9 @@ export function form({ backupFormData, getBackupData }) {
     return button({ disabled: "", style: "color: red" }, msg);
   }
 
-  function viewEntries(entries) {
-    return entries.map((e) => viewEntry(e.question, e.answer));
-  }
-
-  function viewEntry(question, answer) {
+  function viewForm() {
     return div(
-      { class: "entry", "data-entry": "" },
-      [
-        question
-          ? h2({ class: "question", "data-question": "" }, question)
-          : null,
-        textarea(
-          {
-            class: "answer",
-            "aria-label": "textarea",
-            autofocus: "",
-            "data-answer": "",
-          },
-          answer ?? "",
-        ),
-      ]
-    );
-  }
-
-  function viewForm(type) {
-    return div(
-      { "data-form-type": type.type, class: "container" },
+      { class: "container" },
       [
         div(
           { class: "controls" },
@@ -110,44 +83,34 @@ export function form({ backupFormData, getBackupData }) {
             feedbackArea,
           ]
         ),
-        div({ class: "entries" }, viewEntries(type.entries)),
+        formInput,
       ]
     );
   }
 
-  function selectForm(type) {
-    const selectedForm = FORM_TYPES.find((t) => t.type === type);
-    form.update(viewForm(selectedForm));
+  function fillForm(template) {
+    formInput.value = template;
+    root.update(viewForm());
   }
 
-  function showTemplateSelector() {
-    form.update([
-      FORM_TYPES.map((t) => button({ onclick: () => selectForm(t.type) }, t.type)),
+  async function showTemplateSelector() {
+    const templates = await fetch("/templates.json").then((r) => r.json());
+    root.update([
+      templates.map((t) => button({ onclick: () => fillForm(t.content) }, t.name)),
       div({id: "version"}, APP_VERSION || "")
     ]);
   }
 
-  function getFormData() {
-    const formType = form.querySelector("[data-form-type]")?.dataset.formType;
-    const entries = form.querySelectorAll("[data-entry]");
-    if (!formType) return null;
-    let data = {
-      type: formType,
-      entries: [],
-    };
-    for (const e of entries) {
-      const question = e.querySelector("[data-question]")?.innerText || "";
-      const answer = e.querySelector("[data-answer]").value;
-      data.entries.push({ question, answer });
-    }
-    return data;
-  }
-
   setInterval(() => {
-    const backup = getFormData();
-    if (!backup) return;
+    const backup = formInput.value
     backupFormData(backup);
   }, 5000);
 
-  return form;
+  if (getBackupData()) {
+    formInput.value = getBackupData();
+  }
+  formInput.focus();
+
+  return root;
 }
+
