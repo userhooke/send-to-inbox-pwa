@@ -10,5 +10,9 @@
   {
     "name": "Daily journal",
     "content": "What happened today?\n\n\nJoy or Anger or?\n\n\nWhat thought occupies my attention? How long? Why? Do I want this?\n\n\nWith whom am I having dialogues in my head? How long?\n\n\nWith whom have you interacted today? How do you feel about that? Could you describe the situation?\n\n\nWhat are you grateful for today?\n\n\nWhat have you achieved today?\n\n\nWhat did you learn today?\n\n\n"
+  },
+  {
+    "name": "Book analysis",
+    "content": "What is the book about as a whole?\n\nWhat is the main argument or thesis of the book?\n\nWhat evidence or examples does the author provide to support their argument?\n\nAre there any key terms or concepts that require further clarification?\n\nHow does the book relate to other books you've read on the same subject?\n\nWhat is the author's purpose in writing this book?\n\nWhat are the strengths and weaknesses of the author's arguments?\n\nAre there any assumptions or biases present in the book?\n\nDo you agree or disagree with the author's ideas? Why?\n\nWhat practical applications or implications does the book have?\n\n"
   }
 ]
