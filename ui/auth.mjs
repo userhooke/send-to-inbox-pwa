@@ -1,4 +1,4 @@
-import { div, fieldset, h1, label, input, button } from "./html.mjs";
+import { div, fieldset, h1, label, input, button, updateInner } from "./html.mjs";
 import { authenticate } from "./api.mjs";
 
 export function auth({ userLoggedIn }) {
@@ -31,14 +31,14 @@ export function auth({ userLoggedIn }) {
   }
 
   function showError(msg) {
-    feedbackButtonHolder.update(errorButon(msg));
+    updateInner(feedbackButtonHolder, errorButon(msg));
     setTimeout(() => {
-      feedbackButtonHolder.update(activeButon());
+      updateInner(feedbackButtonHolder, activeButon());
     }, 5000);
   }
 
   function showLoading() {
-    feedbackButtonHolder.update(loadingButton());
+    updateInner(feedbackButtonHolder, loadingButton());
   }
 
   async function tryToLogin() {

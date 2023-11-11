@@ -1,4 +1,4 @@
-import { div } from "./html.mjs";
+import { div, updateInner } from "./html.mjs";
 import { auth } from "./auth.mjs";
 import { form } from "./form.mjs";
 
@@ -10,7 +10,7 @@ export function app() {
   }
 
   function updateScene() {
-    root.update(view());
+    updateInner(root, view());
   }
 
   function backupFormData(backup) {

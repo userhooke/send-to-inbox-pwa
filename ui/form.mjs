@@ -1,4 +1,4 @@
-import { div, button, textarea } from "./html.mjs";
+import { div, button, textarea, updateInner } from "./html.mjs";
 import { sendMail } from "./api.mjs";
 
 export function form({ backupFormData, getBackupData }) {
@@ -17,7 +17,7 @@ export function form({ backupFormData, getBackupData }) {
     const message = formInput.value;
     if (!message.length) return;
     
-    feedbackArea.update(loadingButton());
+    updateInner(feedbackArea, loadingButton());
 
     try {
       await sendMail({
@@ -27,7 +27,7 @@ export function form({ backupFormData, getBackupData }) {
 
       localStorage.removeItem("backup");
       formInput.value = "";
-      root.update(viewForm());
+      updateInner(root, viewForm());
       formInput.focus();
       showSuccess();
     } catch (e) {
@@ -37,16 +37,16 @@ export function form({ backupFormData, getBackupData }) {
   }
 
   function showError(msg) {
-    feedbackArea.update(errorButton(msg));
+    updateInner(feedbackArea, errorButton(msg));
     setTimeout(() => {
-      feedbackArea.update(defaultButton());
+      updateInner(feedbackArea, defaultButton());
     }, 5000);
   }
 
   function showSuccess() {
-    feedbackArea.update(successButton());
+    updateInner(feedbackArea, successButton());
     setTimeout(() => {
-      feedbackArea.update(defaultButton());
+      updateInner(feedbackArea, defaultButton());
     }, 2000);
   }
 
@@ -90,12 +90,12 @@ export function form({ backupFormData, getBackupData }) {
 
   function fillForm(template) {
     formInput.value = template;
-    root.update(viewForm());
+    updateInner(root, viewForm());
   }
 
   async function showTemplateSelector() {
     const templates = await fetch("/templates.json").then((r) => r.json());
-    root.update([
+    updateInner(root, [
       templates.map((t) => button({ onclick: () => fillForm(t.content) }, t.name)),
       div({id: "version"}, APP_VERSION || "")
     ]);

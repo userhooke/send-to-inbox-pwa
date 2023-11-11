@@ -14,10 +14,10 @@ function createElement(name, attrs, children) {
   for (const [name, value] of Object.entries(attrs)) {
     switch (name) {
       case "onclick":
-        element.addEventListener("click", value);
+        element.addEventListener("click", (evt, element) => value(evt, element));
         break;
       case "oninput":
-        element.addEventListener("input", value);
+        element.addEventListener("input", (evt, element) => value(evt, element));
         break;
       default:
         element.setAttribute(name, value);
@@ -26,12 +26,12 @@ function createElement(name, attrs, children) {
 
   processChildren(element, children);
 
-  element.update = (newChildren) => {
-    element.replaceChildren();
-    processChildren(element, newChildren);
-  }
-
   return element;
+}
+
+export function updateInner(element, children) {
+  element.replaceChildren();
+  processChildren(element, children);
 }
 
 function processChildren(element, children) {
