@@ -19,7 +19,9 @@ async function call(method, endpoint, data = {}) {
     },
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
-
+  if (!response.ok) {
+    throw new Error(response.status + " " + response.statusText);
+  }
   return response.json(); // parses JSON response into native JavaScript objects
 }
 

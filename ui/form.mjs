@@ -32,7 +32,7 @@ export function form({ backupFormData, getBackupData }) {
       showSuccess();
     } catch (e) {
       console.error(e);
-      showError(e);
+      showError(e.message);
     }
   }
 
