@@ -32,5 +32,13 @@ export function app() {
     }
   }
 
+  const hour = new Date().getHours();
+  if (hour >= 17 || hour <= 6) {
+    document.documentElement.style.setProperty('--main-bg-color', '#000');
+    document.documentElement.style.setProperty('--textarea-color', '#000');
+    document.documentElement.style.setProperty('--font-color', 'green');
+    document.documentElement.style.setProperty('--button-color', 'darkgray');
+  }
+
   return root;
 }

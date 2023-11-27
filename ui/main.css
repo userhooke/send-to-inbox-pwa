@@ -7,15 +7,6 @@
   --button-color: darkgray;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --main-bg-color: #000;
-    --textarea-color: #000;
-    --font-color: green;
-    --button-color: darkgray;
-  }
-}
-
 * {
   font-family: "Source Code Pro", monospace;
   color: var(--font-color);
