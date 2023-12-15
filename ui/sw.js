@@ -1,26 +1,15 @@
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open("v3.0.5");
-  await cache.addAll(resources);
+const CACHE_VERSION = "v3.0.6";
+
+const putInCache = async (request, response) => {
+  const cache = await caches.open(CACHE_VERSION);
+  await cache.put(request, response);
 };
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    addResourcesToCache([
-      "/",
-      "/index.html",
-      "/main.css",
-      "/main.mjs",
-      "/manifest.webmanifest",
-      "/app.mjs",
-      "/html.mjs",
-      "/auth.mjs",
-      "/form.mjs",
-      "/api.mjs",
-      "/templates.json",
-      "/assets/icons/android-icon-144x144.png",
-      "/assets/favicon.ico",
-    ]),
-  );
+self.addEventListener("activate", async () => {
+  console.log("Removing old cache");
+  const existingCaches = await caches.keys();
+  const invalidCaches = existingCaches.filter(c => c !== CACHE_VERSION);
+  await Promise.all(invalidCaches.map(ic => caches.delete(ic)));
 });
 
 const cacheFirst = async (request) => {
@@ -29,8 +18,24 @@ const cacheFirst = async (request) => {
     console.log("Serving from cache:", request.url);
     return responseFromCache;
   }
-  console.log("Serving from network:", request.url);
-  return fetch(request);
+
+  try {
+    console.log("Serving from network:", request.url);
+    const responseFromNetwork = await fetch(request);
+    
+    if(!request.url.includes("/api/")) {
+      putInCache(request, responseFromNetwork.clone());
+    }
+    
+    return responseFromNetwork
+  
+  } catch(e) {
+    console.error(e);
+    return new Response("Network error happened", {
+      status: 408,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
 };
 
 self.addEventListener("fetch", (event) => {
