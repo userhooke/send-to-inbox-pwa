@@ -89,7 +89,7 @@ export function form({ backupFormData, getBackupData }) {
   }
 
   function fillForm(template) {
-    formInput.value = template;
+    formInput.value += template;
     updateInner(root, viewForm());
   }
 
